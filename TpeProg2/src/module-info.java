@@ -1,0 +1,2 @@
+module TpeProg2 {
+}
