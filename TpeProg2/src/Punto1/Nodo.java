@@ -2,9 +2,8 @@ package Punto1;
 
 import java.util.Iterator;
 
-public class Nodo implements Comparable,Iterator{//ta raro que sea iterator, va a ser una clase aparte
+public class Nodo implements Comparable{//ta raro que sea iterator, va a ser una clase aparte
 	
-	private Nodo iterador;
 	private Comparable valor;
 	private Nodo siguiente;
 	
@@ -37,18 +36,6 @@ public class Nodo implements Comparable,Iterator{//ta raro que sea iterator, va 
 	}
 
 	@Override
-	public boolean hasNext() {
-		return this.iterador != null;
-	}
-
-	@Override
-	public Object next() {
-		Nodo toReturn = this.iterador;
-		this.iterador = this.iterador.getSiguiente();
-		return toReturn;
-	}
-
-	@Override
 	public String toString() {
 		return "Nodo [valor=" + valor + "]";
 	}
@@ -57,8 +44,5 @@ public class Nodo implements Comparable,Iterator{//ta raro que sea iterator, va 
 		Nodo n = (Nodo) o;
 		return this.getValor()== n.getValor();
 	}
-	public void setIterador(Nodo otro) {
-		this.iterador = otro;
-	}
-		
+
 }

@@ -1,17 +1,18 @@
 package Punto2_Alumno;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 
 import Punto1.Lista;
 import Punto1.Nodo;
 
-public class Alumno extends Nodo{//no debe extender de nodo
+public class Alumno {//no debe extender de nodo
 
 	private String nombre;
 	private String apellido;
 	private int dni;
 	private int edad;
-	private Lista intereses;
+	private ArrayList<String> intereses;
 	private Comparator<Alumno> criterioDeOrden;
 
 	public Alumno(String nombre, String apellido, int dni, int edad){
@@ -19,7 +20,7 @@ public class Alumno extends Nodo{//no debe extender de nodo
 		this.nombre = nombre;
 		this.dni = dni;
 		this.edad = edad;
-		this.intereses = new Lista();
+		this.intereses = new ArrayList<>();
 		
 	}
 
@@ -39,18 +40,6 @@ public class Alumno extends Nodo{//no debe extender de nodo
 		return edad;
 	}
 
-	
-	/*public int compareTo(Alumno o) {
-		int res = this.apellido.compareTo(o.getApellido());
-		if(res == 0){
-			res = this.nombre.compareTo(o.getNombre());
-			if(res == 0){
-				res = (int) ( this.dni - o.getDni());
-			}
-	}
-	return res;
-	
-	}*/
 	@Override
 	public String toString() {
 		

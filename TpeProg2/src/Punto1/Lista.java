@@ -1,52 +1,26 @@
 package Punto1;
 
 import java.util.Comparator;
-import java.util.Iterator;
+import Punto1.Iterator;
 
-public class Lista implements Iterable<Nodo>{//esto no debe ser de nodo
+public class Lista<T> implements Iterable<Object>{//esto no debe ser de nodo
 
 	private Nodo cabeza;
-	private Comparator<Nodo> criterioOrden;//Esto tampoco
-
-	public Lista(Comparator<Nodo> criterioOrden){
+	private Comparator<Object> criterioOrden;
+	
+	public Lista(Comparator<Object> criterioOrden){
 		this.cabeza = null;
 		this.criterioOrden = criterioOrden;
 	}
+	
 	
 	public Lista() {
 		this.cabeza = null;
 	}
 	
-//	public void addNodo(Nodo nodo) {
-//		//si la cabeza es nulla lo añado ahi
-//		if(this.cabeza==null) {
-//			this.setCabeza(nodo);
-//		}
-//		//si no cabeza ya existe
-//		else {
-//			//pregunto por el siguiente de este
-//			addOrdenado(nodo);
-//		}
-//	}
-//	
-	
-	//podria recibr un object en vez de un nodo para q sea mas reutilizable
-//	public void add(Nodo nuevo) {
-//		if(this.cabeza==null) {
-//			this.setCabeza(nuevo);
-////			cabeza.setIterador(nuevo);
-//		}
-//		else {
-//			for (Nodo n: this) {
-//				if(n.compareTo(nuevo)==-1) {
-//					n.setSiguiente(nuevo);
-//				}
-//			}
-//		}
-//	}
 	public int getSize(){
 		int contador = 0;
-		for(Nodo n: this){
+		for(Object n: this){
 			contador ++;
 		}
 		return contador;
@@ -63,9 +37,10 @@ public class Lista implements Iterable<Nodo>{//esto no debe ser de nodo
 		}
 		return pos;
 	}
+	
 	public void eliminarOcurrencias(Nodo n){
 		int pos =0;
-		for(Nodo nodo: this){
+		for(Object nodo: this){
 			
 			if(n.equals(nodo)){
 				this.eliminar(pos);	
@@ -74,6 +49,7 @@ public class Lista implements Iterable<Nodo>{//esto no debe ser de nodo
 			pos++;
 		}
 	}
+	
 	public void eliminar(int pos){
 		if(pos == 0){
 			this.cabeza = this.cabeza.getSiguiente();
@@ -97,7 +73,8 @@ public class Lista implements Iterable<Nodo>{//esto no debe ser de nodo
 		return null;	
 	}
 	
-	public void insertar(Nodo nuevo) {//llega un objtect no un nodo
+	public void insertar(Comparable<T> o1) {
+		Nodo nuevo = new Nodo(o1); //ESTO ESTA BIEN?
 		if(cabeza == null) {// caso lista vacia
 			cabeza = nuevo;
 		} else {
@@ -126,20 +103,7 @@ public class Lista implements Iterable<Nodo>{//esto no debe ser de nodo
 		}
 	}
 	
-//	public void addOrdenado(Nodo nodo) {
-//		for(Nodo n: this) {
-//			int res = this.criterioOrden.compare(n, nodo);
-//			if(res==1) {
-//				Nodo aux = n;
-//				
-//				
-//			}
-//		}
-//	}
-//	
-
-	
-	public void setCriterioOrden(Comparator<Nodo> criterioOrden) {
+	public void setCriterioOrden(Comparator<Object> criterioOrden) {
 		this.criterioOrden = criterioOrden;
 	}
 
@@ -151,10 +115,21 @@ public class Lista implements Iterable<Nodo>{//esto no debe ser de nodo
 		return this.cabeza == null;
 	}
 
+	//esta bien devolver sin argumentos?
 	@Override
-	public Iterator<Nodo> iterator() {
-		this.cabeza.setIterador(this.cabeza);
-		return this.cabeza;
+	public Iterator iterator() {
+		Iterator i = new Iterator(this.cabeza); 
+		return i;
 	}
+	
+	
 
+	
+	
+	
+	
+	
+	
+	
+	
 }
