@@ -5,7 +5,7 @@ import java.util.Comparator;
 import Punto1.Lista;
 import Punto1.Nodo;
 
-public class Alumno extends Nodo{
+public class Alumno extends Nodo{//no debe extender de nodo
 
 	private String nombre;
 	private String apellido;

@@ -2,7 +2,7 @@ package Punto1;
 
 import java.util.Iterator;
 
-public class Nodo implements Comparable,Iterator{
+public class Nodo implements Comparable,Iterator{//ta raro que sea iterator, va a ser una clase aparte
 	
 	private Nodo iterador;
 	private Comparable valor;

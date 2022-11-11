@@ -3,11 +3,10 @@ package Punto1;
 import java.util.Comparator;
 import java.util.Iterator;
 
-public class Lista implements Iterable<Nodo>{
+public class Lista implements Iterable<Nodo>{//esto no debe ser de nodo
 
 	private Nodo cabeza;
-	private Comparator<Nodo> criterioOrden;
-	private Nodo fin;
+	private Comparator<Nodo> criterioOrden;//Esto tampoco
 
 	public Lista(Comparator<Nodo> criterioOrden){
 		this.cabeza = null;
@@ -84,7 +83,7 @@ public class Lista implements Iterable<Nodo>{
 		this.getIndex(pos-1).setSiguiente(aux);
 	}
 	
-	public Nodo getIndex(int pos){
+	public Nodo getIndex(int pos){//va a devolver el valor no un nodo
 		if(pos< this.getSize()){
 			int contador = 0;
 			Nodo aux = new Nodo();
@@ -98,7 +97,7 @@ public class Lista implements Iterable<Nodo>{
 		return null;	
 	}
 	
-	public void insertar(Nodo nuevo) {
+	public void insertar(Nodo nuevo) {//llega un objtect no un nodo
 		if(cabeza == null) {// caso lista vacia
 			cabeza = nuevo;
 		} else {
@@ -139,10 +138,6 @@ public class Lista implements Iterable<Nodo>{
 //	}
 //	
 
-	
-	public void setFin(Nodo nodo) {
-		this.fin = nodo;
-	}
 	
 	public void setCriterioOrden(Comparator<Nodo> criterioOrden) {
 		this.criterioOrden = criterioOrden;
