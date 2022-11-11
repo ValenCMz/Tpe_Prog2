@@ -4,16 +4,16 @@ import java.util.Comparator;
 
 import Punto1.Nodo;
 
-public class ComparadorNot implements Comparator<Nodo>{
+public class ComparadorNot<T> implements Comparator<Comparable<T>>{
 
-	private Comparator<Nodo> comp;
+	private Comparator<Comparable<T>> comp;
 	
-	public ComparadorNot(Comparator<Nodo>comp) {
+	public ComparadorNot(Comparator<Comparable<T>>comp) {
 		this.comp = comp;
 	}
 
 	@Override
-	public int compare(Nodo o1, Nodo o2) {
+	public int compare(Comparable<T> o1, Comparable<T> o2) {
 		return comp.compare(o1, o2) * -1;
 	}
 

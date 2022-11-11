@@ -2,37 +2,37 @@ package Punto1;
 
 import java.util.Iterator;
 
-public class Nodo implements Comparable{//ta raro que sea iterator, va a ser una clase aparte
+public class Nodo<T> implements Comparable<Nodo<T>>{//ta raro que sea iterator, va a ser una clase aparte
 	
-	private Comparable valor;
-	private Nodo siguiente;
+	private Comparable<T> valor;
+	private Nodo<T> siguiente;
 	
 
-	public Nodo(Comparable valor){
+	public Nodo(Comparable<T> valor){
 		this.valor = valor;
 		this.siguiente = null;
 	}
 	
-	public Nodo(){
+	public Nodo() {
 		
 	}
 
-	public void setSiguiente(Nodo nodo){
+	public void setSiguiente(Nodo<T> nodo){
 		this.siguiente = nodo;
 	}
 	
-	public Nodo getSiguiente(){
+	public Nodo<T> getSiguiente(){
 		return this.siguiente;
 	}
 
-	public Comparable getValor(){
+	public Comparable<T> getValor(){
 		return valor;
 	}
 	
+	//Consultar
 	@Override
-	public int compareTo(Object o) {
-		Nodo otro = (Nodo) o;
-		return this.valor.compareTo(otro.getValor());
+	public int compareTo(Nodo<T> o) {
+		return this.valor.compareTo((T) o.getValor());
 	}
 
 	@Override
@@ -41,8 +41,10 @@ public class Nodo implements Comparable{//ta raro que sea iterator, va a ser una
 	}
 	@Override
 	public boolean equals(Object o){
-		Nodo n = (Nodo) o;
+		Nodo<T> n = (Nodo<T>) o;
 		return this.getValor()== n.getValor();
 	}
+
+	
 
 }

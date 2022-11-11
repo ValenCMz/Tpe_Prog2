@@ -2,21 +2,20 @@ package Punto2_Alumno.Comparadores;
 
 import java.util.Comparator;
 
-import Punto2_Alumno.Alumno;
+public class ComparadorCompuesto<T> implements Comparator<T> {
 
-public class ComparadorCompuesto implements Comparator<Alumno> {
-
-	private Comparator<Alumno> comp1;
-	private Comparator<Alumno> comp2;
-	private Comparator<Alumno> comp3;
+	private Comparator<T> comp1;
+	private Comparator<T> comp2;
+	private Comparator<T> comp3;
 	
-	public ComparadorCompuesto(Comparator<Alumno> comp1,Comparator<Alumno> comp2, Comparator<Alumno> comp3) {
+	public ComparadorCompuesto(Comparator<T> comp1,Comparator<T> comp2, Comparator<T> comp3) {
 		this.comp1 = comp1;
 		this.comp2 = comp2;
 		this.comp3 = comp3;
 	}
-		@Override
-	public int compare(Alumno o1, Alumno o2) {
+	
+	@Override
+	public int compare(T o1, T o2) {
 		int res = comp1.compare(o1, o2);
 		if(res == 0){
 			res = comp2.compare(o1, o2);

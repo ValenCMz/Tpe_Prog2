@@ -4,12 +4,11 @@ import java.util.Comparator;
 
 import Punto2_Alumno.Alumno;
 
-public class ComparadorApellido implements Comparator<Alumno>{
+public class ComparadorApellido<T> implements Comparator<T>{
 
 	@Override
-	public int compare(Alumno o1, Alumno o2) {
-		
-		return o1.getApellido().compareTo(o2.getApellido());
+	public int compare(T o1, T o2) {
+		return ((Alumno) o1).getApellido().compareTo(((Alumno) o2).getApellido());
 	}
 
 }

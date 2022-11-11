@@ -4,11 +4,13 @@ import java.util.Comparator;
 
 import Punto1.Nodo;
 
-public class ComparadorAscendente implements Comparator<Nodo>{
+public class ComparadorAscendente<T> implements Comparator<Comparable<T>>{
 
 
 	@Override
-	public int compare(Nodo o1, Nodo o2) {
-		return  o1.getValor().compareTo(o2.getValor()); //esta bien castearlo?
+	public int compare(Comparable<T> o1, Comparable<T> o2) {
+		return  o1.compareTo((T) o2); //esta bien castearlo?
 	}
+
+
 }

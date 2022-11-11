@@ -2,19 +2,16 @@ package Punto1;
 
 import java.util.Comparator;
 import Punto1.Iterator;
+import Punto2_Alumno.Alumno;
 
 public class Lista<T> implements Iterable<Object>{//esto no debe ser de nodo
 
-	private Nodo cabeza;
-	private Comparator<Object> criterioOrden;
+	private Nodo<T> cabeza;
+	private Comparator<T> criterioOrden;
 	
-	public Lista(Comparator<Object> criterioOrden){
-		this.cabeza = null;
+	
+	public Lista(Comparator<T> criterioOrden) {
 		this.criterioOrden = criterioOrden;
-	}
-	
-	
-	public Lista() {
 		this.cabeza = null;
 	}
 	
@@ -26,7 +23,7 @@ public class Lista<T> implements Iterable<Object>{//esto no debe ser de nodo
 		return contador;
 		
 	}
-	public int getPosicionPrimerOcurrencia(Nodo n){
+	public int getPosicionPrimerOcurrencia(Nodo<T> n){
 		int pos = 0;
 		boolean encontrado = false;
 		while(pos< this.getSize() && encontrado == false){
@@ -38,7 +35,7 @@ public class Lista<T> implements Iterable<Object>{//esto no debe ser de nodo
 		return pos;
 	}
 	
-	public void eliminarOcurrencias(Nodo n){
+	public void eliminarOcurrencias(Nodo<T> n){
 		int pos =0;
 		for(Object nodo: this){
 			
@@ -54,15 +51,15 @@ public class Lista<T> implements Iterable<Object>{//esto no debe ser de nodo
 		if(pos == 0){
 			this.cabeza = this.cabeza.getSiguiente();
 			}
-		Nodo aux = new Nodo();
+		Nodo<T> aux = new Nodo<T>();
 		aux = this.getIndex(pos).getSiguiente();
 		this.getIndex(pos-1).setSiguiente(aux);
 	}
 	
-	public Nodo getIndex(int pos){//va a devolver el valor no un nodo
+	public Nodo<T> getIndex(int pos){//va a devolver el valor no un nodo
 		if(pos< this.getSize()){
 			int contador = 0;
-			Nodo aux = new Nodo();
+			Nodo<T> aux = new Nodo<T>();
 			aux = cabeza;
 			while(contador < pos){
 				aux = aux.getSiguiente();
@@ -74,21 +71,21 @@ public class Lista<T> implements Iterable<Object>{//esto no debe ser de nodo
 	}
 	
 	public void insertar(Comparable<T> o1) {
-		Nodo nuevo = new Nodo(o1); //ESTO ESTA BIEN?
+		Nodo<T> nuevo = new Nodo<T>(o1); //ESTO ESTA BIEN?
 		if(cabeza == null) {// caso lista vacia
 			cabeza = nuevo;
 		} else {
-			Nodo comparacion = cabeza;
+			Nodo<T> comparacion = cabeza;
 			boolean encontre = false;
-			int res = criterioOrden.compare(comparacion, nuevo);
+			int res = criterioOrden.compare((T)comparacion.getValor(), (T)nuevo.getValor());
 			if(res >= 1) { // caso nuevo deberia ser la raiz
 				nuevo.setSiguiente(cabeza);
 				cabeza = nuevo;
 			} else {
 				while(comparacion.getSiguiente() != null && !encontre) {
-					res = criterioOrden.compare(comparacion.getSiguiente(), nuevo);
+					res = criterioOrden.compare((T)comparacion.getSiguiente(), (T)nuevo);
 					if(res >= 1) { // caso nuevo deberia ir entre dos nodos
-						Nodo aux = comparacion.getSiguiente();
+						Nodo<T> aux = comparacion.getSiguiente();
 						comparacion.setSiguiente(nuevo);
 						nuevo.setSiguiente(aux);
 						encontre = true;
@@ -103,11 +100,11 @@ public class Lista<T> implements Iterable<Object>{//esto no debe ser de nodo
 		}
 	}
 	
-	public void setCriterioOrden(Comparator<Object> criterioOrden) {
+	public void setCriterioOrden(Comparator<T> criterioOrden) {
 		this.criterioOrden = criterioOrden;
 	}
 
-	public void setCabeza(Nodo nodo){
+	public void setCabeza(Nodo<T> nodo){
 		this.cabeza = nodo;
 	}
 

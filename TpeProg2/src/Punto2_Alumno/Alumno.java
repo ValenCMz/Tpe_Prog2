@@ -6,7 +6,7 @@ import java.util.Comparator;
 import Punto1.Lista;
 import Punto1.Nodo;
 
-public class Alumno {//no debe extender de nodo
+public class Alumno implements Comparable<Alumno>{//no debe extender de nodo
 
 	private String nombre;
 	private String apellido;
@@ -45,4 +45,15 @@ public class Alumno {//no debe extender de nodo
 		
 		return this.nombre + this.apellido + this.dni;
 	}
+
+	@Override
+	public int compareTo(Alumno o) {
+		int res = this.getApellido().compareTo(o.getApellido());
+		if(res==0) {
+			res = this.getNombre().compareTo(o.getNombre());
+		}
+		return res;
+	}
+	
+	
 }
