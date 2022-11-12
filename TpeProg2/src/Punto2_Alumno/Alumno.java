@@ -5,10 +5,10 @@ import java.util.Comparator;
 
 import Punto1.Lista;
 import Punto1.Nodo;
+import Punto3.ElementoUniversidad;
 
-public class Alumno implements Comparable<Alumno>{//no debe extender de nodo
+public class Alumno extends ElementoUniversidad{
 
-	private String nombre;
 	private String apellido;
 	private int dni;
 	private int edad;
@@ -16,16 +16,12 @@ public class Alumno implements Comparable<Alumno>{//no debe extender de nodo
 	private Comparator<Alumno> criterioDeOrden;
 
 	public Alumno(String nombre, String apellido, int dni, int edad){
+		super(nombre);
 		this.apellido = apellido;
-		this.nombre = nombre;
 		this.dni = dni;
 		this.edad = edad;
 		this.intereses = new ArrayList<>();
 		
-	}
-
-	public String getNombre() {
-		return nombre;
 	}
 
 	public String getApellido() {
@@ -43,17 +39,12 @@ public class Alumno implements Comparable<Alumno>{//no debe extender de nodo
 	@Override
 	public String toString() {
 		
-		return this.nombre + this.apellido + this.dni;
-	}
-
-	@Override
-	public int compareTo(Alumno o) {
-		int res = this.getApellido().compareTo(o.getApellido());
-		if(res==0) {
-			res = this.getNombre().compareTo(o.getNombre());
-		}
-		return res;
+		return this.getNombre() + this.apellido + this.dni;
 	}
 	
+	@Override
+		public int getCantAlumnos() {
+			return 1;
+		}
 	
 }

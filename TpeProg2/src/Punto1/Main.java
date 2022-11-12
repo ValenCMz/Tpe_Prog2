@@ -10,6 +10,8 @@ import Punto2_Alumno.Comparadores.ComparadorApellido;
 import Punto2_Alumno.Comparadores.ComparadorCompuesto;
 import Punto2_Alumno.Comparadores.ComparadorDni;
 import Punto2_Alumno.Comparadores.ComparadorNombre;
+import Punto3.ElementoUniversidad;
+import Punto3.Grupo;
 
 
 
@@ -29,7 +31,7 @@ public class Main {
 	    	System.out.println(n);
 		}
 		    
-
+System.out.println("------------------------------");
 		//prueba de add de alumnos a lista 2
 	
 		Comparator<Alumno>  apellido = new ComparadorApellido<Alumno>();
@@ -41,16 +43,34 @@ public class Main {
 		Alumno a1 = new Alumno("Gonzales","Pedro",21,29);
 		Alumno a2 = new Alumno("Rodriguez","Pedro",21,29);
 		Alumno a3 = new Alumno("Gonzales","Pedro",20,29);
+		Alumno a4 = new Alumno("Roman","aaaa",21,29);
+		Alumno a5 = new Alumno("Luis","bbbb",21,29);
+		Alumno a6 = new Alumno("Marcelo","sadsad",20,29);
 		
-		Lista<Alumno> lista2 = new Lista<Alumno>(compuesto);
+		Grupo g1 = new Grupo("grupo 1");
+		Grupo g2 = new Grupo("grupo 2");
+
+		g1.addElementoUniversidad(a4);
+		g1.addElementoUniversidad(a5);
+		g1.addElementoUniversidad(a6);
+		g2.addElementoUniversidad(a4);
+		g2.addElementoUniversidad(a5);
+		g2.addElementoUniversidad(a6);
+		g1.addElementoUniversidad(g2);
+		
+		Lista<ElementoUniversidad> lista2 = new Lista<ElementoUniversidad>(ascendente);
 		
 		lista2.insertar(a1);
 		lista2.insertar(a2);
 		lista2.insertar(a3);
+		lista2.insertar(g1);
+		
 		
 		for(Object n: lista2) {
 			System.out.println(n);
 		}
+		
+		
 
 	
 	  

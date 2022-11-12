@@ -2,9 +2,10 @@ package Punto1;
 
 import java.util.Comparator;
 import Punto1.Iterator;
+import Punto1.Comparadores.ComparadorAscendente;
 import Punto2_Alumno.Alumno;
 
-public class Lista<T> implements Iterable<Object>{//esto no debe ser de nodo
+public class Lista<T> implements Iterable<Object>{
 
 	private Nodo<T> cabeza;
 	private Comparator<T> criterioOrden;
@@ -13,6 +14,10 @@ public class Lista<T> implements Iterable<Object>{//esto no debe ser de nodo
 	public Lista(Comparator<T> criterioOrden) {
 		this.criterioOrden = criterioOrden;
 		this.cabeza = null;
+	}
+	
+	public Lista() {
+		this.criterioOrden =  (Comparator<T>) new ComparadorAscendente<T>();//esta bien castearlo?
 	}
 	
 	public int getSize(){
@@ -27,7 +32,7 @@ public class Lista<T> implements Iterable<Object>{//esto no debe ser de nodo
 		int pos = 0;
 		boolean encontrado = false;
 		while(pos< this.getSize() && encontrado == false){
-				if(n.equals(this.getIndex(pos))){
+				if(n.equals(this.getNodoByPos(pos))){
 					encontrado = true;
 				}
 			pos++;
@@ -47,16 +52,22 @@ public class Lista<T> implements Iterable<Object>{//esto no debe ser de nodo
 		}
 	}
 	
+	//arreglar
 	public void eliminar(int pos){
 		if(pos == 0){
 			this.cabeza = this.cabeza.getSiguiente();
-			}
+		}
 		Nodo<T> aux = new Nodo<T>();
-		aux = this.getIndex(pos).getSiguiente();
-		this.getIndex(pos-1).setSiguiente(aux);
+		aux = this.getNodoByPos(pos).getSiguiente();//4 5
+		this.getNodoByPos(pos-1).setSiguiente(aux);//3 5
 	}
 	
-	public Nodo<T> getIndex(int pos){//va a devolver el valor no un nodo
+	public Object getValor(int pos) {
+		return this.getNodoByPos(pos).getValor();
+	}
+	
+	
+	private Nodo<T> getNodoByPos(int pos){//va a devolver el valor no un nodo
 		if(pos< this.getSize()){
 			int contador = 0;
 			Nodo<T> aux = new Nodo<T>();
@@ -70,8 +81,8 @@ public class Lista<T> implements Iterable<Object>{//esto no debe ser de nodo
 		return null;	
 	}
 	
-	public void insertar(Comparable<T> o1) {
-		Nodo<T> nuevo = new Nodo<T>(o1); //ESTO ESTA BIEN?
+	public void insertar(T o1) {
+		Nodo<T> nuevo = new Nodo<T>((Comparable<T>) o1); //ESTO ESTA BIEN?
 		if(cabeza == null) {// caso lista vacia
 			cabeza = nuevo;
 		} else {
@@ -119,6 +130,10 @@ public class Lista<T> implements Iterable<Object>{//esto no debe ser de nodo
 		return i;
 	}
 	
+	//hay que implementarlo ja
+	public void sort() {
+		
+	}
 	
 
 	
