@@ -21,7 +21,7 @@ public class Nodo<T> implements Comparable<Nodo<T>>{//ta raro que sea iterator, 
 		this.siguiente = nodo;
 	}
 	
-	public Nodo<T> getSiguiente(){
+	public Nodo<T> getSiguiente(){// está bien que devuelva un nodo? no debería devolver copia?
 		return this.siguiente;
 	}
 

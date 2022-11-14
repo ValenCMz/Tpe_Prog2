@@ -7,13 +7,12 @@ import Punto1.Lista;
 import Punto1.Nodo;
 import Punto3.ElementoUniversidad;
 
-public class Alumno extends ElementoUniversidad{
+public class Alumno extends ElementoUniversidad {
 
 	private String apellido;
 	private int dni;
 	private int edad;
 	private ArrayList<String> intereses;
-	private Comparator<Alumno> criterioDeOrden;
 
 	public Alumno(String nombre, String apellido, int dni, int edad){
 		super(nombre);
@@ -47,4 +46,5 @@ public class Alumno extends ElementoUniversidad{
 			return 1;
 		}
 	
+
 }

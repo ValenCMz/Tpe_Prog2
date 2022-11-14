@@ -4,10 +4,11 @@ import java.util.Comparator;
 import Punto1.Iterator;
 import Punto1.Comparadores.ComparadorAscendente;
 import Punto2_Alumno.Alumno;
+import Punto3.ElementoUniversidad;
 
 public class Lista<T> implements Iterable<Object>{
 
-	private Nodo<T> cabeza;
+	private Nodo<T> cabeza; 
 	private Comparator<T> criterioOrden;
 	
 	
@@ -17,7 +18,8 @@ public class Lista<T> implements Iterable<Object>{
 	}
 	
 	public Lista() {
-		this.criterioOrden =  (Comparator<T>) new ComparadorAscendente<T>();//esta bien castearlo?
+		this.criterioOrden = new ComparadorAscendente();//esta bien castearlo?
+		this.cabeza = null;
 	}
 	
 	public int getSize(){
@@ -88,13 +90,13 @@ public class Lista<T> implements Iterable<Object>{
 		} else {
 			Nodo<T> comparacion = cabeza;
 			boolean encontre = false;
-			int res = criterioOrden.compare((T)comparacion.getValor(), (T)nuevo.getValor());
+			int res = this.criterioOrden.compare((T)comparacion.getValor(), (T)nuevo.getValor());
 			if(res >= 1) { // caso nuevo deberia ser la raiz
 				nuevo.setSiguiente(cabeza);
 				cabeza = nuevo;
 			} else {
 				while(comparacion.getSiguiente() != null && !encontre) {
-					res = criterioOrden.compare((T)comparacion.getSiguiente(), (T)nuevo);
+					res = this.criterioOrden.compare((T)comparacion.getSiguiente(), (T)nuevo);
 					if(res >= 1) { // caso nuevo deberia ir entre dos nodos
 						Nodo<T> aux = comparacion.getSiguiente();
 						comparacion.setSiguiente(nuevo);
@@ -113,12 +115,19 @@ public class Lista<T> implements Iterable<Object>{
 	
 	public void setCriterioOrden(Comparator<T> criterioOrden) {
 		this.criterioOrden = criterioOrden;
+		this.sort();
 	}
 
 	public void setCabeza(Nodo<T> nodo){
 		this.cabeza = nodo;
 	}
 
+	public Nodo getCabeza() {
+		Nodo copiaCabeza = new Nodo();
+		copiaCabeza = this.cabeza;
+		return copiaCabeza;
+	}
+	  
 	public boolean estaVacia(){
 		return this.cabeza == null;
 	}
@@ -132,7 +141,27 @@ public class Lista<T> implements Iterable<Object>{
 	
 	//hay que implementarlo ja
 	public void sort() {
-		
+		for( int i= 0; i< this.getSize(); i++) {
+			Nodo nodoA = this.getNodoByPos(i);
+			for(int j = i; j< this.getSize(); j++) {
+				Nodo nodoB = this.getNodoByPos(j);
+				Comparable<T> valorA = nodoA.getValor();
+				Comparable<T> valorB = nodoB.getValor();
+				if(this.criterioOrden.compare((T)valorA, (T)valorB) >= 1) {
+					nodoA.setSiguiente(nodoB.getSiguiente());
+					if(nodoA.equals(this.cabeza)) {
+						this.setCabeza(nodoB);
+					}
+					nodoB.setSiguiente(nodoA);
+				}
+			}			
+		}
+	}
+
+	public void insertarTodos(Lista<T> auxCopia) {
+		for(Object n: this) {
+			auxCopia.insertar((T)n);
+		}		
 	}
 	
 

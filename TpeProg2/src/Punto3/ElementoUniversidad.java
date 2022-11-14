@@ -1,6 +1,8 @@
 package Punto3;
 
-public abstract class ElementoUniversidad implements Comparable{
+import Punto2_Alumno.Alumno;
+
+public abstract class ElementoUniversidad implements Comparable<ElementoUniversidad>{
 	private String nombre;
 	public abstract int getCantAlumnos();
 	
@@ -16,11 +18,8 @@ public abstract class ElementoUniversidad implements Comparable{
 		this.nombre = nombre;
 	}
 	
-	
-	@Override
-	public int compareTo(Object o) {
-		return this.getCantAlumnos()-((ElementoUniversidad) o).getCantAlumnos();
+	public int compareTo(ElementoUniversidad otro) {
+		return this.getNombre().compareTo(otro.getNombre());
 	}
-	
 	
 }
