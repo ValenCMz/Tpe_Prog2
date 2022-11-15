@@ -1,10 +1,6 @@
 package Punto1;
 
 import java.util.Comparator;
-import Punto1.Iterator;
-import Punto1.Comparadores.ComparadorAscendente;
-import Punto2_Alumno.Alumno;
-import Punto3.ElementoUniversidad;
 
 public class Lista<T> implements Iterable<Object>{
 
@@ -18,8 +14,7 @@ public class Lista<T> implements Iterable<Object>{
 	}
 	
 	public Lista() {
-		this.criterioOrden = new ComparadorAscendente();//esta bien castearlo?
-		this.cabeza = null;
+		
 	}
 	
 	public int getSize(){
@@ -42,26 +37,33 @@ public class Lista<T> implements Iterable<Object>{
 		return pos;
 	}
 	
-	public void eliminarOcurrencias(Nodo<T> n){
+	public void eliminarOcurrencias(T n){
 		int pos =0;
 		for(Object nodo: this){
-			
-			if(n.equals(nodo)){
+			//preguntar esto, hay que redefinir algun equals?
+			if(n.equals(((Nodo<T>) nodo).getValor())){
 				this.eliminar(pos);	
 				pos --;
-			}
+		}
 			pos++;
 		}
 	}
 	
-	//arreglar
 	public void eliminar(int pos){
 		if(pos == 0){
-			this.cabeza = this.cabeza.getSiguiente();
+			if(this.cabeza.getSiguiente()==null) {
+				this.cabeza = null;
+			}
+			else {
+				this.cabeza = this.cabeza.getSiguiente();
+			}
 		}
-		Nodo<T> aux = new Nodo<T>();
-		aux = this.getNodoByPos(pos).getSiguiente();//4 5
-		this.getNodoByPos(pos-1).setSiguiente(aux);//3 5
+		else {
+			Nodo<T> aux = new Nodo<T>();
+			aux = this.getNodoByPos(pos).getSiguiente();//4 5
+			this.getNodoByPos(pos-1).setSiguiente(aux);//3 5
+		}
+		
 	}
 	
 	public Object getValor(int pos) {
@@ -84,19 +86,19 @@ public class Lista<T> implements Iterable<Object>{
 	}
 	
 	public void insertar(T o1) {
-		Nodo<T> nuevo = new Nodo<T>((Comparable<T>) o1); //ESTO ESTA BIEN?
+		Nodo<T> nuevo = new Nodo<T>(o1);
 		if(cabeza == null) {// caso lista vacia
 			cabeza = nuevo;
 		} else {
 			Nodo<T> comparacion = cabeza;
 			boolean encontre = false;
-			int res = this.criterioOrden.compare((T)comparacion.getValor(), (T)nuevo.getValor());
+			int res = this.criterioOrden.compare(comparacion.getValor(), nuevo.getValor());
 			if(res >= 1) { // caso nuevo deberia ser la raiz
 				nuevo.setSiguiente(cabeza);
 				cabeza = nuevo;
 			} else {
 				while(comparacion.getSiguiente() != null && !encontre) {
-					res = this.criterioOrden.compare((T)comparacion.getSiguiente(), (T)nuevo);
+					res = this.criterioOrden.compare(comparacion.getSiguiente().getValor(), nuevo.getValor());
 					if(res >= 1) { // caso nuevo deberia ir entre dos nodos
 						Nodo<T> aux = comparacion.getSiguiente();
 						comparacion.setSiguiente(nuevo);
@@ -142,11 +144,11 @@ public class Lista<T> implements Iterable<Object>{
 	//hay que implementarlo ja
 	public void sort() {
 		for( int i= 0; i< this.getSize(); i++) {
-			Nodo nodoA = this.getNodoByPos(i);
+			Nodo<T> nodoA = this.getNodoByPos(i);
 			for(int j = i; j< this.getSize(); j++) {
-				Nodo nodoB = this.getNodoByPos(j);
-				Comparable<T> valorA = nodoA.getValor();
-				Comparable<T> valorB = nodoB.getValor();
+				Nodo<T> nodoB = this.getNodoByPos(j);
+				T valorA = (T) nodoA.getValor();
+				T  valorB = (T) nodoB.getValor();
 				if(this.criterioOrden.compare((T)valorA, (T)valorB) >= 1) {
 					nodoA.setSiguiente(nodoB.getSiguiente());
 					if(nodoA.equals(this.cabeza)) {

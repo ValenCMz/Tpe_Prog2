@@ -1,16 +1,14 @@
 package Punto1;
 
-import java.util.Collections;
 import java.util.Comparator;
-import java.util.Iterator;
-
-import Punto1.Comparadores.ComparadorAscendente;
+import Punto1.Comparadores.ComparadorAscendenteString;
+import Punto1.Comparadores.ComparadorNot;
 import Punto2_Alumno.Alumno;
 import Punto2_Alumno.Comparadores.ComparadorApellido;
 import Punto2_Alumno.Comparadores.ComparadorCompuesto;
 import Punto2_Alumno.Comparadores.ComparadorDni;
 import Punto2_Alumno.Comparadores.ComparadorNombre;
-import Punto3.ComparadorAlumnoPorCantidad;
+import Punto3.ComparadorCantAlumnos;
 import Punto3.ElementoUniversidad;
 import Punto3.Grupo;
 
@@ -19,10 +17,8 @@ import Punto3.Grupo;
 public class Main {
 
 	public static void main(String[] args) {
-		testAddLista();
-		testSimple();
-	
-		
+//		testAddLista();
+		testSimple();	
 	}
 	
 	
@@ -30,7 +26,7 @@ public class Main {
 	
 	public static void testAddLista() {
 		// prueba de add en lista 1 de string	
-		Comparator ascendente = new ComparadorAscendente();	
+		Comparator<String> ascendente = new ComparadorAscendenteString();	
 		Lista<String> lista1 = new Lista<String>(ascendente);
 		lista1.insertar("hola");
 		lista1.insertar("zzz");
@@ -46,28 +42,27 @@ public class Main {
 		Alumno a2 = new Alumno("z","z",1,29);
 		Alumno a3 = new Alumno("a","a",3,29);
 		
-		Comparator comp = new ComparadorAlumnoPorCantidad();
-		Lista<ElementoUniversidad> l1 = new Lista<ElementoUniversidad>(comp);
-		Grupo universidad = new Grupo("UNICEN");
+		Comparator<ElementoUniversidad> compCantidad = new ComparadorCantAlumnos();
+		Comparator<Alumno> compApellido = new ComparadorApellido<>();
+		Lista<ElementoUniversidad> l1 = new Lista<ElementoUniversidad>(compCantidad);
+		Grupo<ElementoUniversidad> universidad = new Grupo<ElementoUniversidad>("UNICEN", compCantidad);
 		l1.insertar(universidad);
-		Grupo g1 = new Grupo("exactas");
-		Grupo g2 = new Grupo("humanas");
+		Grupo<Alumno> g1 = new Grupo<Alumno>("exactas", compApellido);
+		Grupo<Alumno> g2 = new Grupo<Alumno>("humanas", compApellido);
 		g1.addElementoUniversidad(a2);
 		g1.addElementoUniversidad(a3);
 		universidad.addElementoUniversidad(g1);
 		universidad.addElementoUniversidad(g2);
 		
-		
-		
-	
-
-		
-	
-		System.out.println(universidad.getCantAlumnos());
 		for(Object n: l1) {
 			System.out.println(n);
 		}
 		
+		l1.eliminarOcurrencias(a2);
+		
+		for(Object n: l1) {
+			System.out.println(n);
+		}
 		
 	
 	}
@@ -96,18 +91,18 @@ public class Main {
 		g2.addElementoUniversidad(a1);
 		g1.addElementoUniversidad(g2);
 		
-		Comparator ascendente = new ComparadorAscendente();	
-		Lista<ElementoUniversidad> lista2 = new Lista<ElementoUniversidad>(ascendente);
+	//	Comparator ascendente = new ComparadorAscendente();	
+	//	Lista<ElementoUniversidad> lista2 = new Lista<ElementoUniversidad>(ascendente);
 		
-		lista2.insertar(a1);
-		lista2.insertar(a2);
-		lista2.insertar(a3);
-		lista2.insertar(g1);
-		
-		
-		for(Object n: lista2) {
-			System.out.println(n);
-		}
+//		lista2.insertar(a1);
+//		lista2.insertar(a2);
+//		lista2.insertar(a3);
+//		lista2.insertar(g1);
+//		
+//		
+//		for(Object n: lista2) {
+//			System.out.println(n);
+//		}
 	}
 	
 

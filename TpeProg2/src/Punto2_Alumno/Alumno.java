@@ -6,6 +6,7 @@ import java.util.Comparator;
 import Punto1.Lista;
 import Punto1.Nodo;
 import Punto3.ElementoUniversidad;
+import Punto3.Grupo;
 
 public class Alumno extends ElementoUniversidad {
 
@@ -45,6 +46,15 @@ public class Alumno extends ElementoUniversidad {
 		public int getCantAlumnos() {
 			return 1;
 		}
-	
+	@Override
+	public boolean equals(Object obj) {
+		try {
+			Alumno g = (Alumno)obj;
+			return this.getNombre().equals(g.getNombre());
+		}
+		catch(Exception e) {
+			return false;
+		}
+	}
 
 }

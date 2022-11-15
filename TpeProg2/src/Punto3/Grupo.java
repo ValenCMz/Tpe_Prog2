@@ -4,9 +4,8 @@ import java.util.Comparator;
 
 import Punto1.Lista;
 import Punto1.Nodo;
-import Punto1.Comparadores.ComparadorAscendente;
 
-public class Grupo extends ElementoUniversidad{
+public class Grupo<T> extends ElementoUniversidad{
 
 	private Lista<ElementoUniversidad> listaElementosUniversidad;
 	
@@ -15,7 +14,7 @@ public class Grupo extends ElementoUniversidad{
 		this.listaElementosUniversidad =  new Lista<ElementoUniversidad>();
 	}
 	
-	public Grupo(String nombre, Comparator criterio) {
+	public Grupo(String nombre, Comparator<T> criterio) {
 		this(nombre);
 		this.setCriterioOrden(criterio);
 	}
@@ -59,6 +58,16 @@ public class Grupo extends ElementoUniversidad{
 		return copia;
 	}
 
+@Override
+	public boolean equals(Object obj) {
+		try {
+			Grupo g = (Grupo)obj;
+			return this.getNombre().equals(g.getNombre());
+		}
+		catch(Exception e) {
+			return false;
+		}
+	}
 	
 	
 }
