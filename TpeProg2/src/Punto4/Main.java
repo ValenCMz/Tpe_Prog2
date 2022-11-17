@@ -71,8 +71,7 @@ public class Main {
 			System.out.println(n);
 		}
 
-		System.out.println("Punto I");
-		Comparator<ElementoUniversidad>apellido = new ComparadorApellido<>();
+		System.out.println("Punto I Unicen");
 		Comparator<ElementoUniversidad>compAscUniversidad = new ComparadorCantAlumnos();
 		Comparator<ElementoUniversidad>compDesUniversidad = new ComparadorNot<ElementoUniversidad>(compAscUniversidad);
 
@@ -121,6 +120,39 @@ public class Main {
 		for(Object n:lista1) {
 			System.out.println(n);
 		}
+		
+		System.out.println("Punto I Olimpiadas Matematicas");
+		Lista<ElementoUniversidad> olimpiadas = new Lista<ElementoUniversidad>(compDesUniversidad);
+		Grupo<ElementoUniversidad> matea2 = new Grupo<ElementoUniversidad>("Matea2",compDesUniversidad);
+		Grupo<ElementoUniversidad> losFibo = new Grupo<ElementoUniversidad>("LosFibo",compDesUniversidad);
+		Alumno juan = new Alumno("Juan","Juarez",33222444);//añadir a matea2
+		juan.addIntereses("sucesiones");
+		juan.addIntereses("algebra");
+		Alumno julio = new Alumno("Julio","Cesar",33222111);//añadir a matea2
+		julio.addIntereses("sucesiones");
+		julio.addIntereses("algebra");
+		Alumno bernardino = new Alumno("Bernardino","Rivas",30987654);//añadir a losFibo
+		bernardino.addIntereses("matematicas");
+		Alumno jose = new Alumno("Jose","Paso",33322112);//añadir a losFibo
+		jose.addIntereses("problemas");
+		Alumno isaac = new Alumno("Isaac","Newton",1234565);//añadir a losFibo
+		isaac.addIntereses("sucesiones");
+		
+		matea2.addElementoUniversidad(juan);
+		matea2.addElementoUniversidad(julio);
+		losFibo.addElementoUniversidad(bernardino);
+		losFibo.addElementoUniversidad(jose);
+		losFibo.addElementoUniversidad(isaac);
+		olimpiadas.insertar(matea2);
+		olimpiadas.insertar(losFibo);
+
+		
+		for(Object n:olimpiadas) {
+			System.out.println(n);
+		}
+		
+
+
 	}
 
 }

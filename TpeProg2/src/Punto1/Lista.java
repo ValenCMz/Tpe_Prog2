@@ -120,7 +120,7 @@ public class Lista<T> implements Iterable<Object>{
 	
 	public void setCriterioOrden(Comparator<T> criterioOrden) {
 		this.criterioOrden = criterioOrden;
-		this.sort();
+		this.reverse();
 	}
 
 	public void setCabeza(Nodo<T> nodo){
@@ -145,50 +145,68 @@ public class Lista<T> implements Iterable<Object>{
 	}
 	
 	//hay que implementarlo ja
-	public void sort() {	
-		Nodo<T> aux = new Nodo<T>();
-		for( int i= 0; i< this.getSize(); i++) {
-			Nodo<T> nodoA = this.getNodoByPos(i);
-			for(int j = i+1; j< this.getSize(); j++) {
-				Nodo<T> nodoB = this.getNodoByPos(j);
-				T valorA = nodoA.getValor();
-				T  valorB = nodoB.getValor();
-				if(this.criterioOrden.compare(valorA, valorB) >= 1) {
-					aux = nodoA;
-					if(i==0) {
-						this.setCabeza(nodoB);
-					}
-					nodoA.setSiguiente(nodoB.getSiguiente());
-					nodoB.setSiguiente(aux);
-				}
-			}		
-		
-		}
+//	public void sort() {	
+//		Nodo<T> aux = new Nodo<T>();
+//		for( int i= 0; i< this.getSize(); i++) {
+//			Nodo<T> nodoA = this.getNodoByPos(i);
+//			for(int j = i+1; j< this.getSize(); j++) {
+//				Nodo<T> nodoB = this.getNodoByPos(j);
+//				T valorA = nodoA.getValor();
+//				T  valorB = nodoB.getValor();
+//				if(this.criterioOrden.compare(valorA, valorB) >= 1) {
+//					aux = nodoA;
+//					if(i==0) {
+//						this.setCabeza(nodoB);
+//					}
+//					nodoA.setSiguiente(nodoB.getSiguiente());
+//					nodoB.setSiguiente(aux);
+//				}
+//			}		
+//		
+//		}
+//	}
+//	
+//	public void sortB() {	
+//		Nodo<T> aux = new Nodo<T>();
+//		int i = 0;
+//		for(Object a : this) {
+//			Nodo<T> nodoA = (Nodo<T>) a;
+//			for(Object b : this) {
+//				Nodo<T> nodoB = (Nodo<T>) b;
+//				T valorA = nodoA.getValor();
+//				T valorB = nodoB.getValor();
+//				if(this.criterioOrden.compare(valorA, valorB) >= 1) {
+//					aux.setSiguiente(nodoB);
+//					if(i==0) {
+//						this.setCabeza(nodoB);
+//					}
+//					nodoB.setSiguiente(aux.getSiguiente());
+//					nodoA.setSiguiente(nodoB.getSiguiente());
+//				}
+//		
+//			}
+//			i++;
+//		}
+//	}
+
+	public void reverse() {
+		Nodo <T> cab = cabeza;
+        Nodo <T> ant = null;
+        Nodo <T> temp = null;
+
+        while(cab != null){
+            temp = cab.getSiguiente();
+            cab.setSiguiente(ant);
+            ant = cab;
+            cab = temp;
+     
+        }
+
+
+       this.cabeza = ant;
 	}
 	
-	public void sortB() {	
-		Nodo<T> aux = new Nodo<T>();
-		int i = 0;
-		for(Object a : this) {
-			Nodo<T> nodoA = (Nodo<T>) a;
-			for(Object b : this) {
-				Nodo<T> nodoB = (Nodo<T>) b;
-				T valorA = nodoA.getValor();
-				T valorB = nodoB.getValor();
-				if(this.criterioOrden.compare(valorA, valorB) >= 1) {
-					aux.setSiguiente(nodoB);
-					if(i==0) {
-						this.setCabeza(nodoB);
-					}
-					nodoB.setSiguiente(aux.getSiguiente());
-					nodoA.setSiguiente(nodoB.getSiguiente());
-				}
-		
-			}
-			i++;
-		}
-	}
-
+	
 	public void insertarTodos(Lista<T> auxCopia) {
 		for(Object n: this) {
 			auxCopia.insertar((T)n);
