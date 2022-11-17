@@ -58,7 +58,7 @@ public class Main {
 			System.out.println(n);
 		}
 		
-		l1.eliminarOcurrencias(a2);
+		l1.eliminarOcurrencias(g1);
 		
 		for(Object n: l1) {
 			System.out.println(n);

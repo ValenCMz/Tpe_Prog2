@@ -25,16 +25,20 @@ public class Lista<T> implements Iterable<Object>{
 		return contador;
 		
 	}
-	public int getPosicionPrimerOcurrencia(Nodo<T> n){
+	public int getPosicionPrimerOcurrencia(T n){
 		int pos = 0;
 		boolean encontrado = false;
 		while(pos< this.getSize() && encontrado == false){
-				if(n.equals(this.getNodoByPos(pos))){
+				if(n.equals(this.getNodoByPos(pos).getValor())){
 					encontrado = true;
 				}
 			pos++;
 		}
-		return pos;
+		if(encontrado) {
+			return pos;
+		}else {
+			return -1;
+		}
 	}
 	
 	public void eliminarOcurrencias(T n){
@@ -74,8 +78,7 @@ public class Lista<T> implements Iterable<Object>{
 	private Nodo<T> getNodoByPos(int pos){//va a devolver el valor no un nodo
 		if(pos< this.getSize()){
 			int contador = 0;
-			Nodo<T> aux = new Nodo<T>();
-			aux = cabeza;
+			Nodo<T> aux = cabeza;
 			while(contador < pos){
 				aux = aux.getSiguiente();
 				contador ++;	
@@ -142,21 +145,47 @@ public class Lista<T> implements Iterable<Object>{
 	}
 	
 	//hay que implementarlo ja
-	public void sort() {
+	public void sort() {	
+		Nodo<T> aux = new Nodo<T>();
 		for( int i= 0; i< this.getSize(); i++) {
 			Nodo<T> nodoA = this.getNodoByPos(i);
-			for(int j = i; j< this.getSize(); j++) {
+			for(int j = i+1; j< this.getSize(); j++) {
 				Nodo<T> nodoB = this.getNodoByPos(j);
-				T valorA = (T) nodoA.getValor();
-				T  valorB = (T) nodoB.getValor();
-				if(this.criterioOrden.compare((T)valorA, (T)valorB) >= 1) {
-					nodoA.setSiguiente(nodoB.getSiguiente());
-					if(nodoA.equals(this.cabeza)) {
+				T valorA = nodoA.getValor();
+				T  valorB = nodoB.getValor();
+				if(this.criterioOrden.compare(valorA, valorB) >= 1) {
+					aux = nodoA;
+					if(i==0) {
 						this.setCabeza(nodoB);
 					}
-					nodoB.setSiguiente(nodoA);
+					nodoA.setSiguiente(nodoB.getSiguiente());
+					nodoB.setSiguiente(aux);
 				}
-			}			
+			}		
+		
+		}
+	}
+	
+	public void sortB() {	
+		Nodo<T> aux = new Nodo<T>();
+		int i = 0;
+		for(Object a : this) {
+			Nodo<T> nodoA = (Nodo<T>) a;
+			for(Object b : this) {
+				Nodo<T> nodoB = (Nodo<T>) b;
+				T valorA = nodoA.getValor();
+				T valorB = nodoB.getValor();
+				if(this.criterioOrden.compare(valorA, valorB) >= 1) {
+					aux.setSiguiente(nodoB);
+					if(i==0) {
+						this.setCabeza(nodoB);
+					}
+					nodoB.setSiguiente(aux.getSiguiente());
+					nodoA.setSiguiente(nodoB.getSiguiente());
+				}
+		
+			}
+			i++;
 		}
 	}
 

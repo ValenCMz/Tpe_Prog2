@@ -23,7 +23,19 @@ public class Alumno extends ElementoUniversidad {
 		this.intereses = new ArrayList<>();
 		
 	}
+	
+	public Alumno(String nombre, String apellido, int dni){
+		super(nombre);
+		this.apellido = apellido;
+		this.dni = dni;
+		this.intereses = new ArrayList<>();
+		
+	}
 
+	public void addIntereses(String interes) {
+		this.intereses.add(interes);
+	}
+	
 	public String getApellido() {
 		return apellido;
 	}
