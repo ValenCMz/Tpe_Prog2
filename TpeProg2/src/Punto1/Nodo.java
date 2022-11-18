@@ -29,7 +29,7 @@ public class Nodo<T>{
 	
 	@Override
 	public String toString() {
-		return "Nodo [valor=" + valor + "]";
+		return "[" + valor  + "]";
 	}
 	
 

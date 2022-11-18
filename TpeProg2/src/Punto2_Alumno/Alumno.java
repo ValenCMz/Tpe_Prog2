@@ -51,7 +51,7 @@ public class Alumno extends ElementoUniversidad {
 	@Override
 	public String toString() {
 		
-		return this.getNombre() + this.apellido + this.dni;
+		return this.getNombre() + " " + this.apellido + " " + "DNI:" + this.dni + " " +  "Intereses:" +this.intereses;
 	}
 	
 	@Override

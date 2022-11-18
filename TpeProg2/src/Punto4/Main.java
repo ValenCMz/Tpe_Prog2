@@ -26,13 +26,13 @@ public class Main {
 		listaInteger.insertar(11);
 //		b) Se recorra la lista creada (utilizando un foreach) y se impriman los valores por
 //		consola
-		System.out.println("Punto B");
+		System.out.println("----------- Punto B -----------");
 		for(Object n : listaInteger) {
 			System.out.println(n);
 		}
 //		c) Se elimine el primer elemento de la lista (por posición), luego el elemento “5” y luego
 //		el elemento “11” (dado el elemento). Volver a recorrer e imprimir la lista resultante.
-		System.out.println("Punto c");
+		System.out.println("----------- Punto C -----------");
 		listaInteger.eliminar(0);
 		listaInteger.eliminarOcurrencias(5);
 		listaInteger.eliminarOcurrencias(11);
@@ -48,22 +48,22 @@ public class Main {
 		listaString.insertar("Parcial");
 		listaString.insertar("Prog2");
 		
-		System.out.println("Punto E");
+		System.out.println("----------- Punto E -----------");
 		for(Object n : listaString) {
 			System.out.println(n);
 		}
 		
 		//f) Imprimir por consola en qué posición se encuentra la palabra “Parcial”
-		System.out.println("Punto F");
+		System.out.println("----------- Punto F -----------");
 		System.out.println(listaString.getPosicionPrimerOcurrencia("Parcial"));
 	
 		//g) Imprimir por consola en qué posición se encuentra la palabra “Recuperatorio”
-		System.out.println("Punto G");
+		System.out.println("----------- Punto G -----------");
 		System.out.println(listaString.getPosicionPrimerOcurrencia("Recuperatorio"));
 
 //		h) Se cambie el orden de la lista de strings para que los elementos queden ordenados
 //		descendentemente
-		System.out.println("Punto H");
+		System.out.println("----------- Punto H -----------");
 		
 		Comparator<String>compDescendete = new ComparadorNot<>(compAscString);
 		listaString.setCriterioOrden(compDescendete);
@@ -71,12 +71,11 @@ public class Main {
 			System.out.println(n);
 		}
 
-		System.out.println("Punto I Unicen");
+		System.out.println("----------- Punto I Unicen -----------");
 		Comparator<ElementoUniversidad>compAscUniversidad = new ComparadorCantAlumnos();
 		Comparator<ElementoUniversidad>compDesUniversidad = new ComparadorNot<ElementoUniversidad>(compAscUniversidad);
 
-		Lista<ElementoUniversidad> lista1 = new Lista<ElementoUniversidad>(compDesUniversidad);
-		Grupo<ElementoUniversidad> unicen = new Grupo<ElementoUniversidad>("unicen",compDesUniversidad);
+		Lista<ElementoUniversidad> unicen = new Lista<ElementoUniversidad>(compDesUniversidad);
 		Grupo<ElementoUniversidad> exactas = new Grupo<ElementoUniversidad>("exactas",compDesUniversidad);
 		Grupo<ElementoUniversidad> humanas = new Grupo<ElementoUniversidad>("humanas",compDesUniversidad);
 		Grupo<ElementoUniversidad> historia = new Grupo<ElementoUniversidad>("historia",compDesUniversidad);
@@ -104,9 +103,6 @@ public class Main {
 		Alumno roman = new Alumno("Roman","Bazan",32555111);//añadir a historia
 		roman.addIntereses("argentina");
 
-		
-		unicen.addElementoUniversidad(exactas);
-		unicen.addElementoUniversidad(humanas);
 		humanas.addElementoUniversidad(historia);
 		historia.addElementoUniversidad(roman);
 		historia.addElementoUniversidad(martin);
@@ -114,14 +110,16 @@ public class Main {
 		humanas.addElementoUniversidad(mora);
 		exactas.addElementoUniversidad(federico);
 		exactas.addElementoUniversidad(juana);
-		unicen.addElementoUniversidad(john);
-		lista1.insertar(unicen);
+		unicen.insertar(john);
+		unicen.insertar(exactas);
+		unicen.insertar(humanas);
+
 		
-		for(Object n:lista1) {
+		for(Object n:unicen) {
 			System.out.println(n);
 		}
 		
-		System.out.println("Punto I Olimpiadas Matematicas");
+		System.out.println("----------- Punto I Olimpiadas Matematicas -----------");
 		Lista<ElementoUniversidad> olimpiadas = new Lista<ElementoUniversidad>(compDesUniversidad);
 		Grupo<ElementoUniversidad> matea2 = new Grupo<ElementoUniversidad>("Matea2",compDesUniversidad);
 		Grupo<ElementoUniversidad> losFibo = new Grupo<ElementoUniversidad>("LosFibo",compDesUniversidad);
