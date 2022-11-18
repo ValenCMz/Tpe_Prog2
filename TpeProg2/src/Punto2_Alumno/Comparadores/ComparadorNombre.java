@@ -11,7 +11,5 @@ public class ComparadorNombre<T> implements Comparator<T>{
 		
 		return ((Alumno) o1).getNombre().compareTo(((Alumno) o2).getNombre());
 	}
-	
-	
 
 }

@@ -19,7 +19,7 @@ public class Nodo<T>{
 		this.siguiente = nodo;
 	}
 	
-	public Nodo<T> getSiguiente(){// está bien que devuelva un nodo? no debería devolver copia?
+	public Nodo<T> getSiguiente(){
 		return this.siguiente;
 	}
 

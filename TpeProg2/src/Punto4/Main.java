@@ -33,9 +33,9 @@ public class Main {
 //		c) Se elimine el primer elemento de la lista (por posición), luego el elemento “5” y luego
 //		el elemento “11” (dado el elemento). Volver a recorrer e imprimir la lista resultante.
 		System.out.println("----------- Punto C -----------");
-		listaInteger.eliminar(0);
-		listaInteger.eliminarOcurrencias(5);
-		listaInteger.eliminarOcurrencias(11);
+		listaInteger.eliminar(0);//por pos
+		listaInteger.eliminarOcurrencias(5);//dado el elemento
+		listaInteger.eliminarOcurrencias(11);//dado el elemento
 		for(Object n : listaInteger) {
 			System.out.println(n);
 		}
@@ -59,7 +59,7 @@ public class Main {
 	
 		//g) Imprimir por consola en qué posición se encuentra la palabra “Recuperatorio”
 		System.out.println("----------- Punto G -----------");
-		System.out.println(listaString.getPosicionPrimerOcurrencia("Recuperatorio"));
+		System.out.println(listaString.getPosicionPrimerOcurrencia("Recuperatorio"));//si devuelve -1 es porque no se encuentra en la lista
 
 //		h) Se cambie el orden de la lista de strings para que los elementos queden ordenados
 //		descendentemente
@@ -75,7 +75,8 @@ public class Main {
 		Comparator<ElementoUniversidad>compAscUniversidad = new ComparadorCantAlumnos();
 		Comparator<ElementoUniversidad>compDesUniversidad = new ComparadorNot<ElementoUniversidad>(compAscUniversidad);
 
-		Lista<ElementoUniversidad> unicen = new Lista<ElementoUniversidad>(compDesUniversidad);
+		Lista<ElementoUniversidad> lista = new Lista<ElementoUniversidad>(compDesUniversidad);
+		Grupo<ElementoUniversidad> unicen = new Grupo<ElementoUniversidad>("unicen",compDesUniversidad);
 		Grupo<ElementoUniversidad> exactas = new Grupo<ElementoUniversidad>("exactas",compDesUniversidad);
 		Grupo<ElementoUniversidad> humanas = new Grupo<ElementoUniversidad>("humanas",compDesUniversidad);
 		Grupo<ElementoUniversidad> historia = new Grupo<ElementoUniversidad>("historia",compDesUniversidad);
@@ -110,17 +111,13 @@ public class Main {
 		humanas.addElementoUniversidad(mora);
 		exactas.addElementoUniversidad(federico);
 		exactas.addElementoUniversidad(juana);
-		unicen.insertar(john);
-		unicen.insertar(exactas);
-		unicen.insertar(humanas);
+		unicen.addElementoUniversidad(john);
+		unicen.addElementoUniversidad(exactas);
+		unicen.addElementoUniversidad(humanas);
+		lista.insertar(unicen);
 
-		
-		for(Object n:unicen) {
-			System.out.println(n);
-		}
-		
-		System.out.println("----------- Punto I Olimpiadas Matematicas -----------");
-		Lista<ElementoUniversidad> olimpiadas = new Lista<ElementoUniversidad>(compDesUniversidad);
+	
+		Grupo<ElementoUniversidad> olimpiadas = new Grupo<ElementoUniversidad>("Olimpiadas Matematicas",compDesUniversidad);
 		Grupo<ElementoUniversidad> matea2 = new Grupo<ElementoUniversidad>("Matea2",compDesUniversidad);
 		Grupo<ElementoUniversidad> losFibo = new Grupo<ElementoUniversidad>("LosFibo",compDesUniversidad);
 		Alumno juan = new Alumno("Juan","Juarez",33222444);//añadir a matea2
@@ -141,11 +138,11 @@ public class Main {
 		losFibo.addElementoUniversidad(bernardino);
 		losFibo.addElementoUniversidad(jose);
 		losFibo.addElementoUniversidad(isaac);
-		olimpiadas.insertar(matea2);
-		olimpiadas.insertar(losFibo);
-
+		olimpiadas.addElementoUniversidad(matea2);
+		olimpiadas.addElementoUniversidad(losFibo);
+		lista.insertar(olimpiadas);
 		
-		for(Object n:olimpiadas) {
+		for(Object n : lista) {
 			System.out.println(n);
 		}
 		

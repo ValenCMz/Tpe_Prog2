@@ -17,6 +17,7 @@ public class Lista<T> implements Iterable<Object>{
 		
 	}
 	
+	
 	public int getSize(){
 		int contador = 0;
 		for(Object n: this){
@@ -28,23 +29,19 @@ public class Lista<T> implements Iterable<Object>{
 	public int getPosicionPrimerOcurrencia(T n){
 		int pos = 0;
 		boolean encontrado = false;
-		while(pos< this.getSize() && encontrado == false){
+		while(encontrado == false && pos< this.getSize()  ){
 				if(n.equals(this.getNodoByPos(pos).getValor())){
 					encontrado = true;
+					return pos;
 				}
 			pos++;
 		}
-		if(encontrado) {
-			return pos;
-		}else {
-			return -1;
-		}
+		return -1;
 	}
 	
 	public void eliminarOcurrencias(T n){
 		int pos =0;
 		for(Object nodo: this){
-			//preguntar esto, hay que redefinir algun equals?
 			if(n.equals(((Nodo<T>) nodo).getValor())){
 				this.eliminar(pos);	
 				pos --;
@@ -64,8 +61,8 @@ public class Lista<T> implements Iterable<Object>{
 		}
 		else {
 			Nodo<T> aux = new Nodo<T>();
-			aux = this.getNodoByPos(pos).getSiguiente();//4 5
-			this.getNodoByPos(pos-1).setSiguiente(aux);//3 5
+			aux = this.getNodoByPos(pos).getSiguiente();
+			this.getNodoByPos(pos-1).setSiguiente(aux);
 		}
 		
 	}
@@ -75,7 +72,7 @@ public class Lista<T> implements Iterable<Object>{
 	}
 	
 	
-	private Nodo<T> getNodoByPos(int pos){//va a devolver el valor no un nodo
+	private Nodo<T> getNodoByPos(int pos){
 		if(pos< this.getSize()){
 			int contador = 0;
 			Nodo<T> aux = cabeza;
@@ -137,7 +134,6 @@ public class Lista<T> implements Iterable<Object>{
 		return this.cabeza == null;
 	}
 
-	//esta bien devolver sin argumentos?
 	@Override
 	public Iterator iterator() {
 		Iterator i = new Iterator(this.cabeza); 
